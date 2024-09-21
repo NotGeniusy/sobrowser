@@ -10,10 +10,8 @@ You can list any ScriptableObject class and view/edit/clone any instance of it!
 - Select any ScriptableObject class
 - View/Edit/Clone!
 
-Access any instance from the left tab
-Edit its variables from the right tab
-Go to instance's directory
-Clone a instance
+- Go to directory of any instance from "Go to directory" button
+- Clone any instance from "Create <classname> Clone" button
 
 # Limitations
 - There is no way to detect classes that don't have a ScriptableObject on the project folder.
