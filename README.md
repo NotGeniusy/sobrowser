@@ -15,11 +15,14 @@ Edit its variables from the right tab
 Go to instance's directory
 Clone a instance
 
-(Delete button didn't added intentionally to prevent mistakes. Go to directory and delete manually if needed)
-
 # Limitations
 - There is no way to detect classes that don't have a ScriptableObject on the project folder.
 You need to have at least 1 instance of that class to access it through the SO Browser.
 
 - It's impossible to create a file without knowing its class before compiling.
 So, it can't create a empty ScriptableObject but copy the selected one.
+
+# Config
+
+SO Browser ignores default namespaces of Unity (UnityEngine and UnityEditor) to avoid unnecessary classes in the menu.
+You can edit ignored namespaces from Packages > ScriptableObject Browser > Editor > Config
