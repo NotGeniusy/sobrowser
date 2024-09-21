@@ -1,0 +1,18 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <ui:GroupBox style="width: 100%; height: 100%; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; justify-content: space-between; align-items: stretch; min-height: 400px;">
+        <uie:Toolbar style="flex-basis: 8%; height: auto; justify-content: space-between; align-self: auto; align-items: center;">
+            <uie:ToolbarSearchField name="ScriptableSearchField" style="width: 200px;" />
+            <uie:ToolbarSpacer style="width: 10px;" />
+            <ui:VisualElement style="flex-grow: 1; flex-direction: row; justify-content: flex-end; align-items: center;">
+                <ui:Label text="Selected Scriptable" parse-escape-sequences="true" display-tooltip-when-elided="true" name="SelectedScriptableText" style="color: rgb(255, 255, 255); text-shadow: 0 0 50px rgb(0, 0, 0);" />
+                <ui:Button text="Open directory" parse-escape-sequences="true" display-tooltip-when-elided="true" name="DirectoryButton" tooltip="Open selected ScriptableObject&apos;s directory" />
+                <ui:Button text="Create &lt;typename&gt;" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CreateButton" tooltip="Copies and creates a new file from selected ScriptableObject with its datas" />
+                <ui:Button text="Go back" name="ReturnButton" tooltip="Return to type selection" style="transform-origin: center;" />
+            </ui:VisualElement>
+        </uie:Toolbar>
+        <ui:GroupBox style="flex-direction: row; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-left: 0; padding-right: 0; justify-content: space-between; align-self: auto; background-color: rgba(0, 0, 0, 0.11); padding-bottom: 5px; padding-top: 5px; flex-basis: 92%;">
+            <ui:ScrollView scroll-deceleration-rate="0,135" elasticity="0,1" name="ItemsList" horizontal-scroller-visibility="Hidden" style="height: 100%; background-color: rgba(0, 0, 0, 0.07); flex-basis: 20%;" />
+            <ui:ScrollView scroll-deceleration-rate="0,135" elasticity="0,1" name="ContentList" vertical-scroller-visibility="AlwaysVisible" style="flex-basis: 80%;" />
+        </ui:GroupBox>
+    </ui:GroupBox>
+</ui:UXML>

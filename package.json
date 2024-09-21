@@ -1,0 +1,17 @@
+{
+  "name": "com.enesborekci.sobrowser",
+  "version": "1.0.0",
+  "displayName": "ScriptableObject Browser",
+  "description": "All of your ScriptableObjects in one tab!",
+  "keywords": [
+    "sobrowser",
+    "ScriptableObject",
+    "Scriptable Object",
+    "Browser"
+  ],
+  "author": {
+    "name": "Enes Börekci",
+    "email": "dev@enesborekci.com.tr",
+    "url": "https://www.enesborekci.com.tr"
+  }
+}
