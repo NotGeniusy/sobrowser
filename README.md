@@ -18,7 +18,7 @@ You can list any ScriptableObject class and view/edit/clone any instance of it!
 # Config
 
 SO Browser ignores default namespaces of Unity (UnityEngine and UnityEditor) to avoid unnecessary classes in the menu.
-You can edit ignored namespaces from:<br> <strong>SO Browser Home Page > Config Button > Ignored Namespaces Textbox</strong> <br>
+You can edit ignored namespaces from:<br> ```SO Browser Home Page > Config Button > Ignored Namespaces Textbox``` <br>
 - Write each namespace in a new line.
 
 ![Screenshot_18](https://github.com/user-attachments/assets/f46104cf-119f-4670-9bfa-e73a03a27092)
@@ -29,3 +29,20 @@ You need to have at least 1 instance of that class to access it through the SO B
 
 - It's impossible to create a file without knowing its class before compiling.
 So, it can't create an empty ScriptableObject but copy the selected one.
+
+# Installation
+
+### 1. Install with UPM<br>
+- Open the Unity Package Manager
+- Select ```Install package from git URL```
+- Copy and paste: ```https://github.com/NotGeniusy/sobrowser.git```<br>
+- Done!<br>
+![Screenshot_21](https://github.com/user-attachments/assets/0af3c340-6d7e-4543-a574-471351f3bb4a)
+
+### 2. Manual installation with .zip
+- Download the .zip from GitHub ```https://github.com/NotGeniusy/sobrowser/archive/refs/heads/main.zip```
+- Extract the .zip to ```[Project Directory]/Packages```
+
+# Requirements
+```Unity 2019.1 or higher``` <br>
+It uses UnityEngine.UIElements that released in Unity 2019.1
