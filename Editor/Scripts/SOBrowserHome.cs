@@ -34,6 +34,14 @@ public class SOBrowserHome : Editor
         ToolbarSearchField typeSearchField = rootVisualElement.Q<ToolbarSearchField>("SearchField");
 
         typeSearchField.RegisterValueChangedCallback(OnTypeSearched);
+
+        Button configButton = rootVisualElement.Q<Button>("ConfigButton");
+        configButton.clicked += () =>
+        {
+            SOBrowserConfigEditor.OpenConfigWindow();
+        };
+
+        SOBrowserConfigEditor.OnIgnoredNamespacesChanged += OnIgnoredNamespacesChanged;
     }
 
     private void ListAllTypes(string[] ignoredNamespaces)
@@ -93,5 +101,10 @@ public class SOBrowserHome : Editor
 
             typeList.Add(button);
         }
+    }
+
+    private void OnIgnoredNamespacesChanged()
+    {
+        ListAllTypes(SOBrowserConfigEditor.ReadConfig());
     }
 }

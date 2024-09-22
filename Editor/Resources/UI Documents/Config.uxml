@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <ui:VisualElement style="flex-grow: 1; align-items: stretch; justify-content: space-between; height: 100px; padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px; align-self: auto;">
+        <ui:Label text="Ignored namespaces" parse-escape-sequences="true" display-tooltip-when-elided="true" style="-unity-font-style: bold;" />
+        <ui:TextField picking-mode="Ignore" value="Ignored namespaces..." name="NamespaceField" multiline="true" style="flex-wrap: wrap; height: 203px; padding-top: 5px; padding-bottom: 5px;" />
+        <ui:Button text="Save" parse-escape-sequences="true" display-tooltip-when-elided="true" name="SaveButton" />
+    </ui:VisualElement>
+</ui:UXML>

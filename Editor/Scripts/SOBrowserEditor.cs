@@ -18,7 +18,7 @@ public class SOBrowserEditor : EditorWindow
     {
         EditorWindow window = GetWindow(typeof(SOBrowserEditor));
         window.titleContent = new GUIContent("ScriptableObject Browser");
-        window.minSize = new Vector2(700,400);
+        window.minSize = new Vector2(700, 400);
         window.Show();
     }
 
@@ -41,9 +41,9 @@ public class SOBrowserEditor : EditorWindow
         VisualElement tree = visualTree.Instantiate();
         rootVisualElement.Add(tree);
 
-        SOBrowserConfig config = AssetDatabase.LoadAssetAtPath<SOBrowserConfig>("Packages/com.enesborekci.sobrowser/Editor/Config.asset");
+        string[] ignoredNamespaces = SOBrowserConfigEditor.ReadConfig();
 
-        SOBrowserHome homePage = SOBrowserHome.CreateInstance(rootVisualElement, config.ignoredNamespaces);
+        SOBrowserHome homePage = SOBrowserHome.CreateInstance(rootVisualElement, ignoredNamespaces);
         homePage.OnTypeSelected += OpenScriptableListPage;
     }
 
