@@ -17,8 +17,8 @@ You can list any ScriptableObject class and view/edit/clone any instance of it!
 
 # Config
 
-SO Browser ignores default namespaces of Unity (UnityEngine and UnityEditor) to avoid unnecessary classes in the menu.<br>
-You can edit ignored namespaces from <strong>SO Browser Home Page > Config Button > Ignored Namespaces Textbox</strong> <br>
+SO Browser ignores default namespaces of Unity (UnityEngine and UnityEditor) to avoid unnecessary classes in the menu.
+You can edit ignored namespaces from:<br> <strong>SO Browser Home Page > Config Button > Ignored Namespaces Textbox</strong> <br>
 - Write each namespace in a new line.
 
 ![Screenshot_18](https://github.com/user-attachments/assets/f46104cf-119f-4670-9bfa-e73a03a27092)
@@ -28,4 +28,4 @@ You can edit ignored namespaces from <strong>SO Browser Home Page > Config Butto
 You need to have at least 1 instance of that class to access it through the SO Browser.
 
 - It's impossible to create a file without knowing its class before compiling.
-So, it can't create a empty ScriptableObject but copy the selected one.
+So, it can't create an empty ScriptableObject but copy the selected one.
