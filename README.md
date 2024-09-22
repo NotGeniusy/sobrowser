@@ -13,14 +13,19 @@ You can list any ScriptableObject class and view/edit/clone any instance of it!
 - Go to directory of any instance from "Go to directory" button
 - Clone any instance from "Create [classname] Clone" button
 
+![sobrowser_preview](https://github.com/user-attachments/assets/fdc7bd43-e6de-4d7e-ab37-31676225a7c4)
+
+# Config
+
+SO Browser ignores default namespaces of Unity (UnityEngine and UnityEditor) to avoid unnecessary classes in the menu.<br>
+You can edit ignored namespaces from <strong>SO Browser Home Page > Config Button > Ignored Namespaces Textbox</strong> <br>
+- Write each namespace in a new line.
+
+![Screenshot_18](https://github.com/user-attachments/assets/f46104cf-119f-4670-9bfa-e73a03a27092)
+
 # Limitations
 - There is no way to detect classes that don't have a ScriptableObject on the project folder.
 You need to have at least 1 instance of that class to access it through the SO Browser.
 
 - It's impossible to create a file without knowing its class before compiling.
 So, it can't create a empty ScriptableObject but copy the selected one.
-
-# Config
-
-SO Browser ignores default namespaces of Unity (UnityEngine and UnityEditor) to avoid unnecessary classes in the menu.
-You can edit ignored namespaces from Packages > ScriptableObject Browser > Editor > Config
