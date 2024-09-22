@@ -11,8 +11,6 @@ public class SOBrowserEditor : EditorWindow
 {
     private SOBrowserMain mainPage;
 
-    private bool isGUIPainted = false;
-
     [MenuItem("Tools/ScriptableObject Browser")]
     public static void OpenBrowser()
     {
