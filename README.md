@@ -2,11 +2,11 @@
 Are you tired from trying to find scriptable objects inside messy folders?
 Then, you came to the right door.
 
-SO Browser lists all ScriptableObject classes that exists in your project for you.
+SO Browser lists all ScriptableObject classes that exist in your project for you.
 You can list any ScriptableObject class and view/edit/clone any instance of it!
 
 # Usage
-- Open the SO Browser from Tools > ScriptableObject Browser
+- Open the SO Browser from ```Tools > ScriptableObject Browser```
 - Select any ScriptableObject class
 - View/Edit/Clone!
 <br></br>
