@@ -1,9 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+#if UNITY_EDITOR
 using UnityEditor;
-using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -77,3 +73,4 @@ public class SOBrowserEditor : EditorWindow
         OpenHomePage();
     }
 }
+#endif
