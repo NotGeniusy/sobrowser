@@ -7,21 +7,21 @@ using UnityEngine.UIElements;
 
 public class SOBrowserConfigEditor : EditorWindow
 {
-    private static EditorWindow window;
+    private static EditorWindow _window;
 
-    private const string configPath = "Packages/com.enesborekci.sobrowser/Editor/Config.txt";
+    private const string CONFIGPATH = "Packages/com.enesborekci.sobrowser/Editor/Config.txt";
 
     public static Action OnIgnoredNamespacesChanged;
 
     public static void OpenConfigWindow()
     {
-        window = GetWindow(typeof(SOBrowserConfigEditor));
-        window.titleContent = new GUIContent("Edit Config");
+        _window = GetWindow(typeof(SOBrowserConfigEditor));
+        _window.titleContent = new GUIContent("Edit Config");
 
-        window.minSize = new Vector2(400, 300);
-        window.maxSize = window.minSize;
+        _window.minSize = new Vector2(400, 300);
+        _window.maxSize = _window.minSize;
 
-        window.Show();
+        _window.Show();
     }
 
     private void CreateGUI()
@@ -48,7 +48,7 @@ public class SOBrowserConfigEditor : EditorWindow
 
     public static string[] ReadConfig()
     {
-        StreamReader reader = new StreamReader(configPath);
+        StreamReader reader = new StreamReader(CONFIGPATH);
 
         string[] ignoredNamespaces = reader.ReadToEnd().Split("\n");
 
@@ -59,15 +59,15 @@ public class SOBrowserConfigEditor : EditorWindow
 
     private void WriteConfig(string ignoredNamespaces)
     {
-        StreamWriter writer = new StreamWriter(configPath, false);
+        StreamWriter writer = new StreamWriter(CONFIGPATH, false);
         writer.Write(ignoredNamespaces);
         writer.Close();
 
-        AssetDatabase.ImportAsset(configPath);
+        AssetDatabase.ImportAsset(CONFIGPATH);
 
         OnIgnoredNamespacesChanged?.Invoke();
 
-        window.Close();
+        _window.Close();
     }
 }
 #endif

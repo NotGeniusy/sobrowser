@@ -5,27 +5,27 @@ using UnityEngine.UIElements;
 
 public class SOBrowserCreateObjectEditor : EditorWindow
 {
-    private static EditorWindow window;
+    private static EditorWindow _window;
 
-    private static ScriptableObject selectedScriptableObject;
-    private static string path = "";
+    private static ScriptableObject _selectedScriptableObject;
+    private static string _path = "";
 
-    private string fileName;
+    private string _fileName;
 
     public static System.Action<ScriptableObject> OnScriptableObjectCreated;
 
     public static void OpenPopup(ScriptableObject scriptableObject)
     {
-        if(window != null) window.Close();
+        if(_window != null) _window.Close();
 
-        selectedScriptableObject = scriptableObject;
-        path = "Assets";
+        _selectedScriptableObject = scriptableObject;
+        _path = "Assets";
 
-        window = GetWindow(typeof(SOBrowserCreateObjectEditor));
-        window.titleContent = new GUIContent("Create new ScriptableObject");
-        window.minSize = new Vector2(500, 120);
-        window.maxSize = window.minSize;
-        window.Show();
+        _window = GetWindow(typeof(SOBrowserCreateObjectEditor));
+        _window.titleContent = new GUIContent("Create new ScriptableObject");
+        _window.minSize = new Vector2(500, 120);
+        _window.maxSize = _window.minSize;
+        _window.Show();
     }
 
     public void CreateGUI()
@@ -35,18 +35,18 @@ public class SOBrowserCreateObjectEditor : EditorWindow
         rootVisualElement.Add(page);
 
         TextField nameField = rootVisualElement.Q<TextField>("NameField");
-        nameField.SetValueWithoutNotify(selectedScriptableObject.GetType().Name);
+        nameField.SetValueWithoutNotify(_selectedScriptableObject.GetType().Name);
 
         nameField.RegisterValueChangedCallback(OnNameChanged);
-        fileName = selectedScriptableObject.GetType().Name;
+        _fileName = _selectedScriptableObject.GetType().Name;
 
         Label directoryLabel = rootVisualElement.Q<Label>("DirectoryText");
-        directoryLabel.text = path;
+        directoryLabel.text = _path;
 
         Button directoryButton = rootVisualElement.Q<Button>("SelectDirectoryButton");
         directoryButton.clicked += () =>
         {
-            string newPath = EditorUtility.OpenFolderPanel("Select folder", path, "");
+            string newPath = EditorUtility.OpenFolderPanel("Select folder", _path, "");
             
             if (!string.IsNullOrEmpty(newPath))
             {
@@ -56,9 +56,9 @@ public class SOBrowserCreateObjectEditor : EditorWindow
                 }
                 else
                 {
-                    path = "Assets" + newPath.Split("Assets")[1];
+                    _path = "Assets" + newPath.Split("Assets")[1];
 
-                    directoryLabel.text = path;
+                    directoryLabel.text = _path;
                 }
             }
         };
@@ -69,12 +69,12 @@ public class SOBrowserCreateObjectEditor : EditorWindow
 
     private void CreateScriptableObject()
     {
-        var createdObj = Instantiate(selectedScriptableObject);
+        var createdObj = Instantiate(_selectedScriptableObject);
 
         int index = -1;
-        string[] nameArray = fileName.Split(" ");
+        string[] nameArray = _fileName.Split(" ");
 
-        string nameBase = string.Copy(fileName);
+        string nameBase = string.Copy(_fileName);
 
         if (nameArray.Length > 1 && int.TryParse(nameArray[nameArray.Length - 1], out int startIndex))
         {
@@ -90,15 +90,15 @@ public class SOBrowserCreateObjectEditor : EditorWindow
             index = startIndex;
         }
 
-        while (AssetDatabase.LoadAssetAtPath<ScriptableObject>(path + $"/{fileName}.asset") != null)
+        while (AssetDatabase.LoadAssetAtPath<ScriptableObject>(_path + $"/{_fileName}.asset") != null)
         {
             index++;
-            fileName = nameBase + " " + index;
+            _fileName = nameBase + " " + index;
         }
 
-        AssetDatabase.CreateAsset(createdObj, path+$"/{fileName}.asset");
+        AssetDatabase.CreateAsset(createdObj, _path+$"/{_fileName}.asset");
 
-        fileName = nameBase;
+        _fileName = nameBase;
 
         OnScriptableObjectCreated?.Invoke(createdObj);
     }
@@ -107,7 +107,7 @@ public class SOBrowserCreateObjectEditor : EditorWindow
     {
         string newName = evt.newValue;
 
-        fileName = newName;
+        _fileName = newName;
     }
 }
 #endif

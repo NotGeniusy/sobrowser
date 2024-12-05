@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 
 public class SOBrowserEditor : EditorWindow
 {
-    private SOBrowserMain mainPage;
+    private SOBrowserMain _mainPage;
 
     [MenuItem("Tools/ScriptableObject Browser")]
     public static void OpenBrowser()
@@ -23,9 +23,9 @@ public class SOBrowserEditor : EditorWindow
 
     private void OnGUI()
     {
-        if (mainPage != null && !mainPage.isGUIPainted)
+        if (_mainPage != null && !_mainPage.IsGUIPainted)
         {
-            mainPage.PaintMainGUI();
+            _mainPage.PaintMainGUI();
         }
     }
 
@@ -49,7 +49,7 @@ public class SOBrowserEditor : EditorWindow
         VisualElement tree = visualTree.Instantiate();
         rootVisualElement.Add(tree);
 
-        mainPage = SOBrowserMain.CreateInstance(rootVisualElement, scriptableObj);
+        _mainPage = SOBrowserMain.CreateInstance(rootVisualElement, scriptableObj);
 
         Button returnButton = rootVisualElement.Q<Button>("ReturnButton");
         returnButton.clicked += () =>
@@ -63,7 +63,7 @@ public class SOBrowserEditor : EditorWindow
             SOBrowserCreateObjectEditor.OpenPopup(scriptableObj);
         };
 
-        SOBrowserCreateObjectEditor.OnScriptableObjectCreated += mainPage.OnScriptableObjectCreated;
+        SOBrowserCreateObjectEditor.OnScriptableObjectCreated += _mainPage.OnScriptableObjectCreated;
     }
 
     private void ReturnToHome()

@@ -10,25 +10,25 @@ using UnityEngine.UIElements;
 
 public class SOBrowserMain : Editor
 {
-    private VisualElement rootVisualElement;
+    private VisualElement _rootVisualElement;
 
     private SerializedObject _serializedObject;
     private SerializedProperty _property;
 
-    private ScrollView scriptableObjectList, contentList;
+    private ScrollView _scriptableObjectList, _contentList;
 
-    private List<ScriptableObject> scriptableObjects = new List<ScriptableObject>();
+    private List<ScriptableObject> _scriptableObjects = new List<ScriptableObject>();
 
-    private Label selectedScriptableLabel;
+    private Label _selectedScriptableLabel;
 
-    public bool isGUIPainted = false;
+    public bool IsGUIPainted = false;
 
     public static SOBrowserMain CreateInstance(VisualElement root, ScriptableObject scriptableObj)
     {
         SOBrowserMain instance = new SOBrowserMain();
 
-        instance.rootVisualElement = root;
-        instance.isGUIPainted = false;
+        instance._rootVisualElement = root;
+        instance.IsGUIPainted = false;
 
         instance.Initialize(scriptableObj);
 
@@ -37,23 +37,23 @@ public class SOBrowserMain : Editor
 
     private void Initialize(ScriptableObject scriptableObj)
     {
-        scriptableObjectList = rootVisualElement.Q<ScrollView>("ItemsList");
-        contentList = rootVisualElement.Q<ScrollView>("ContentList");
+        _scriptableObjectList = _rootVisualElement.Q<ScrollView>("ItemsList");
+        _contentList = _rootVisualElement.Q<ScrollView>("ContentList");
 
-        ToolbarSearchField scriptableSearchField = rootVisualElement.Q<ToolbarSearchField>("ScriptableSearchField");
+        ToolbarSearchField scriptableSearchField = _rootVisualElement.Q<ToolbarSearchField>("ScriptableSearchField");
         scriptableSearchField.RegisterValueChangedCallback(OnScriptableSearched);
 
-        Button directoryButton = rootVisualElement.Q<Button>("DirectoryButton");
+        Button directoryButton = _rootVisualElement.Q<Button>("DirectoryButton");
         directoryButton.clicked += () =>
         {
             EditorGUIUtility.PingObject(_serializedObject.targetObject);
         };
 
-        selectedScriptableLabel = rootVisualElement.Q<Label>("SelectedScriptableText");
+        _selectedScriptableLabel = _rootVisualElement.Q<Label>("SelectedScriptableText");
 
         Type type = scriptableObj.GetType();
 
-        Button createObjectButton = rootVisualElement.Q<Button>("CreateButton");
+        Button createObjectButton = _rootVisualElement.Q<Button>("CreateButton");
         createObjectButton.text = $"Create {type.Name} Clone";
 
         LoadScriptableObjectData(scriptableObj);
@@ -62,9 +62,9 @@ public class SOBrowserMain : Editor
 
     public void PaintMainGUI()
     {
-        isGUIPainted = true;
+        IsGUIPainted = true;
 
-        contentList.Clear();
+        _contentList.Clear();
 
         _property.NextVisible(true);
 
@@ -78,14 +78,14 @@ public class SOBrowserMain : Editor
             PropertyField field = new PropertyField(_property);
             field.Bind(_serializedObject);
 
-            contentList.Add(field);
+            _contentList.Add(field);
         }
     }
 
     private void ListAllScriptableObjects(System.Type searchingType)
     {
-        scriptableObjectList.Clear();
-        scriptableObjects.Clear();
+        _scriptableObjectList.Clear();
+        _scriptableObjects.Clear();
 
         string[] scriptableObjectFiles = Directory.GetFiles(Application.dataPath, "*.asset", SearchOption.AllDirectories);
 
@@ -98,8 +98,8 @@ public class SOBrowserMain : Editor
             {
                 Button button = CreateScriptableObjectButton(scriptableObject);
 
-                scriptableObjectList.Add(button);
-                scriptableObjects.Add(scriptableObject);
+                _scriptableObjectList.Add(button);
+                _scriptableObjects.Add(scriptableObject);
             }
         }
     }
@@ -109,9 +109,9 @@ public class SOBrowserMain : Editor
         _serializedObject = new SerializedObject(scriptableObj);
         _property = _serializedObject.GetIterator();
 
-        isGUIPainted = false;
+        IsGUIPainted = false;
 
-        selectedScriptableLabel.text = scriptableObj.name;
+        _selectedScriptableLabel.text = scriptableObj.name;
     }
 
     private Button CreateScriptableObjectButton(ScriptableObject scriptableObj)
@@ -129,22 +129,22 @@ public class SOBrowserMain : Editor
     public void OnScriptableObjectCreated(ScriptableObject obj)
     {
         Button button = CreateScriptableObjectButton(obj);
-        scriptableObjectList.Add(button);
+        _scriptableObjectList.Add(button);
     }
 
     private void OnScriptableSearched(ChangeEvent<string> evt)
     {
         string searchText = evt.newValue;
 
-        List<ScriptableObject> matchingScriptableObjects = scriptableObjects.Where(x => x.name.Contains(searchText, StringComparison.OrdinalIgnoreCase))
+        List<ScriptableObject> matchingScriptableObjects = _scriptableObjects.Where(x => x.name.Contains(searchText, StringComparison.OrdinalIgnoreCase))
                                                                             .ToList();
 
-        scriptableObjectList.Clear();
+        _scriptableObjectList.Clear();
         foreach (ScriptableObject scriptableObj in matchingScriptableObjects)
         {
             Button button = CreateScriptableObjectButton(scriptableObj);
 
-            scriptableObjectList.Add(button);
+            _scriptableObjectList.Add(button);
         }
     }
 }

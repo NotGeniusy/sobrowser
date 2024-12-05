@@ -10,10 +10,10 @@ using UnityEngine.UIElements;
 
 public class SOBrowserHome : Editor
 {
-    private VisualElement rootVisualElement;
+    private VisualElement _rootVisualElement;
 
-    private ScrollView typeList;
-    private List<ScriptableObject> types = new List<ScriptableObject>();
+    private ScrollView _typeList;
+    private List<ScriptableObject> _types = new List<ScriptableObject>();
 
     public Action<ScriptableObject> OnTypeSelected;
 
@@ -21,7 +21,7 @@ public class SOBrowserHome : Editor
     {
         SOBrowserHome instance = new SOBrowserHome();
 
-        instance.rootVisualElement = rootVisualElement;
+        instance._rootVisualElement = rootVisualElement;
         instance.Initialize();
         instance.ListAllTypes(ignoredNamespaces);
 
@@ -30,12 +30,12 @@ public class SOBrowserHome : Editor
 
     private void Initialize()
     {
-        typeList = rootVisualElement.Q<ScrollView>("ScrollView");
-        ToolbarSearchField typeSearchField = rootVisualElement.Q<ToolbarSearchField>("SearchField");
+        _typeList = _rootVisualElement.Q<ScrollView>("ScrollView");
+        ToolbarSearchField typeSearchField = _rootVisualElement.Q<ToolbarSearchField>("SearchField");
 
         typeSearchField.RegisterValueChangedCallback(OnTypeSearched);
 
-        Button configButton = rootVisualElement.Q<Button>("ConfigButton");
+        Button configButton = _rootVisualElement.Q<Button>("ConfigButton");
         configButton.clicked += () =>
         {
             SOBrowserConfigEditor.OpenConfigWindow();
@@ -46,9 +46,9 @@ public class SOBrowserHome : Editor
 
     private void ListAllTypes(string[] ignoredNamespaces)
     {
-        typeList.Clear();
+        _typeList.Clear();
 
-        types = new List<ScriptableObject>();
+        _types = new List<ScriptableObject>();
 
         string[] scriptableObjectFiles = Directory.GetFiles(Application.dataPath, "*.asset", SearchOption.AllDirectories);
 
@@ -62,13 +62,13 @@ public class SOBrowserHome : Editor
                 string typeName = scriptableObject.GetType().Name;
                 string namespaceName = scriptableObject.GetType().Namespace;
 
-                if (types.Any(x => x.GetType().Name.Equals(typeName)) ||
+                if (_types.Any(x => x.GetType().Name.Equals(typeName)) ||
                    (!string.IsNullOrEmpty(namespaceName) && ignoredNamespaces.Any(x => x.Contains(namespaceName) || namespaceName.Contains(x)))) continue;
 
                 Button button = CreateTypeButton(typeName, scriptableObject);
 
-                typeList.Add(button);
-                types.Add(scriptableObject);
+                _typeList.Add(button);
+                _types.Add(scriptableObject);
             }
         }
     }
@@ -92,14 +92,14 @@ public class SOBrowserHome : Editor
     {
         string searchText = evt.newValue;
 
-        List<ScriptableObject> matchingScriptableObjects = types.Where(x => x.GetType().Name.Contains(searchText, StringComparison.OrdinalIgnoreCase)).ToList();
+        List<ScriptableObject> matchingScriptableObjects = _types.Where(x => x.GetType().Name.Contains(searchText, StringComparison.OrdinalIgnoreCase)).ToList();
 
-        typeList.Clear();
+        _typeList.Clear();
         foreach (ScriptableObject scriptableObj in matchingScriptableObjects)
         {
             Button button = CreateTypeButton(scriptableObj.GetType().Name, scriptableObj);
 
-            typeList.Add(button);
+            _typeList.Add(button);
         }
     }
 
